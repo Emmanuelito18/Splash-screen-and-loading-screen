@@ -1,20 +1,40 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package pantallaPerzonalizada;
 
+import java.awt.Color;
+import java.awt.Point;
+
 /**
- *
+ * Ventana principal donde se muestra un JFrame con forma personalizada
  * @author Emmanuelito18
  */
 public class Principal extends javax.swing.JFrame {
-
+    private Color transparente;//crea un nuevo color
+    private Point punto;//se utliza para obtener el punto en que se está haciendo click y en donde está el mouse
     /**
      * Creates new form Principal
      */
     public Principal() {
+        transparente=new Color(0,0,0,0);//Crea el color trasnparente
+        //setUndecorated(true); para que no este la barra arriba de la ventana
         initComponents();
+        setLocationRelativeTo(null);
+        setBackground(transparente);//cambia el fondo del JFrame utilizando el color transparente antes creado
+
+        // <editor-fold defaultstate="collapsed" desc="Cambia el fondo del panel pnlBackground">
+        PoneImagenes fondo=new PoneImagenes(pnlBackground, "/iconos/shape2.png");
+        pnlBackground.add(fondo).repaint();
+        pnlBackground.setOpaque(false);
+        pnlBackground.setBorder(null);
+        pnlBackground.setBackground(transparente);
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Cambia el fondo del panel pnlCerrar">
+        PoneImagenes salir=new PoneImagenes(pnlCerrar, "/iconos/salir.png");
+        pnlCerrar.add(salir).repaint();
+        pnlCerrar.setOpaque(false);
+        pnlCerrar.setBorder(null);
+        pnlCerrar.setBackground(transparente);
+        // </editor-fold>
     }
 
     /**
@@ -27,62 +47,115 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBackground = new javax.swing.JPanel();
+        pnlCerrar = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(350, 350));
         setSize(new java.awt.Dimension(350, 350));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlBackground.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                pnlBackgroundMouseDragged(evt);
+            }
+        });
+        pnlBackground.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                pnlBackgroundMousePressed(evt);
+            }
+        });
+
+        pnlCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlCerrarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlCerrarLayout = new javax.swing.GroupLayout(pnlCerrar);
+        pnlCerrar.setLayout(pnlCerrarLayout);
+        pnlCerrarLayout.setHorizontalGroup(
+            pnlCerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
+        pnlCerrarLayout.setVerticalGroup(
+            pnlCerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 16, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
         pnlBackground.setLayout(pnlBackgroundLayout);
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                .addContainerGap(319, Short.MAX_VALUE)
+                .addComponent(pnlCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(328, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(pnlBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Se utiliza para obtener el punto del JFrame en la que se hace el click
+     * @param evt 
+     */
+    private void pnlBackgroundMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBackgroundMousePressed
+        punto=evt.getPoint();//obtiene la posicion del mouse
+        getComponentAt(punto);//obtine el componene en la posición punto (posición del mouse)
+    }//GEN-LAST:event_pnlBackgroundMousePressed
+
+    /**
+     * Se utiliza para saber la posición del mouse mientras se mueve teniendo el click izquierdo presionado
+     * @param evt 
+     */
+    private void pnlBackgroundMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlBackgroundMouseDragged
+        // <editor-fold defaultstate="collapsed" desc="Obtiene la posición actual en donde se encuentra el cursor">
+        int ActualX=this.getLocation().x;
+        int ActualY=this.getLocation().y;
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Calcula el movimieno del mouse">
+        int movimientoX=(ActualX+evt.getX())-(ActualX+punto.x);
+        int movimientoY=(ActualY+evt.getY())-(ActualY+punto.y);
+        /*
+        ActualX y ActualY sirven para obtner las coordenadas de la ventana o componente
+        evt.getX() y evt.getY() sirven para obener las coordenadas de la posición del mouse
+        punto.x y punto.y son las coordenas del mouse almacenadas previamente al hacer click
+        Al restarse estas cantidades se obtiene el movimiento en cada eje
+        */
+        // </editor-fold>
+        
+        // <editor-fold defaultstate="collapsed" desc="Calcula la nueva ubicación del JFrame">
+        int x=ActualX+movimientoX;
+        int y=ActualY+movimientoY;
+        //calcula la nueva posición sumando la posición actual de cada eje con el movimiento en cada eje
+        // </editor-fold>
+        
+        this.setLocation(x,y);//establece la ubicación del JFrame según las coordenadas calculadas
+    }//GEN-LAST:event_pnlBackgroundMouseDragged
+
+    /**
+     * Se utiliza para saber cuando se dio click en el panel para cerrar el JFrame
+     * @param evt 
+     */
+    private void pnlCerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlCerrarMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_pnlCerrarMouseClicked
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -94,5 +167,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnlBackground;
+    private javax.swing.JPanel pnlCerrar;
     // End of variables declaration//GEN-END:variables
 }
