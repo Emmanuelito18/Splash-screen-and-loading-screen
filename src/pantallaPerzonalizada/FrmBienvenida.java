@@ -15,6 +15,7 @@ public class FrmBienvenida extends javax.swing.JFrame {
      */
     public FrmBienvenida() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -26,18 +27,37 @@ public class FrmBienvenida extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        pnlBienvenida = new javax.swing.JPanel();
+        jblBienvenidos = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlBienvenida.setBackground(new java.awt.Color(0, 153, 255));
+
+        jblBienvenidos.setFont(new java.awt.Font("Lucida Handwriting", 0, 36)); // NOI18N
+        jblBienvenidos.setForeground(new java.awt.Color(255, 255, 255));
+        jblBienvenidos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jblBienvenidos.setText("Bienvenidos");
+
+        javax.swing.GroupLayout pnlBienvenidaLayout = new javax.swing.GroupLayout(pnlBienvenida);
+        pnlBienvenida.setLayout(pnlBienvenidaLayout);
+        pnlBienvenidaLayout.setHorizontalGroup(
+            pnlBienvenidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBienvenidaLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(jblBienvenidos)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        pnlBienvenidaLayout.setVerticalGroup(
+            pnlBienvenidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBienvenidaLayout.createSequentialGroup()
+                .addContainerGap(134, Short.MAX_VALUE)
+                .addComponent(jblBienvenidos)
+                .addGap(116, 116, 116))
         );
+
+        getContentPane().add(pnlBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,5 +98,7 @@ public class FrmBienvenida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jblBienvenidos;
+    private javax.swing.JPanel pnlBienvenida;
     // End of variables declaration//GEN-END:variables
 }
