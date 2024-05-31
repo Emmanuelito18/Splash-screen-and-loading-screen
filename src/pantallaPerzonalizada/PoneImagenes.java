@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
- * Esta clase se encarga del manejo de imagenes en nuestro programa
+ * Esta clase se encarga del manejo de imagenes en nuestro programa utilizando la clase Graphics
  * @author Emmanuelito18
  * @param ancho Número de tipo entero mayor o igual a 0, determina el ancho de la imagen
  * @param alto Número de tipo entero mayor o igual a 0, determina el lato de la imagen
