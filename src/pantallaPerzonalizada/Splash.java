@@ -10,13 +10,13 @@ import javax.swing.Timer;
  * Ventana principal donde se muestra un JFrame con forma personalizada
  * @author Emmanuelito18
  */
-public class Principal extends javax.swing.JFrame {
+public class Splash extends javax.swing.JFrame {
     private Color transparente;//crea un nuevo color
     private Point punto;//se utliza para obtener el punto en que se está haciendo click y en donde está el mouse
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Splash() {
         transparente=new Color(0,0,0,0);//Crea el color trasnparente
         //setUndecorated(true); para que no este la barra arriba de la ventana
         initComponents();
@@ -199,7 +199,7 @@ public class Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new Splash().setVisible(true);
             }
         });
     }
