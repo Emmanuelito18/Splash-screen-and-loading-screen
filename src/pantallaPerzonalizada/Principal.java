@@ -2,6 +2,9 @@ package pantallaPerzonalizada;
 
 import java.awt.Color;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 /**
  * Ventana principal donde se muestra un JFrame con forma personalizada
@@ -35,8 +38,23 @@ public class Principal extends javax.swing.JFrame {
         pnlCerrar.setBorder(null);
         pnlCerrar.setBackground(transparente);
         // </editor-fold>
+        
+        barraProgresoIniciado();//se llama al método para iniciar la barra de progreso
     }
 
+    /**
+     * Se utiliza para que la barra de progreso vaya aumentando su porcenaje
+     * no recibe parametros
+     */
+    private void barraProgresoIniciado(){
+        Timer timer=new Timer(45, (ActionEvent e) -> {//funcion lambda para el timer
+           pbCarga.setValue(pbCarga.getValue()+1);//obtiene el valor que ya tiene y le suma 1
+           pbCarga.setBackground(Color.ORANGE);//Cambia el color de fondo de la barra de progreso
+           pbCarga.setStringPainted(true);//Habilita el poder mostrar texto en la barra de prograso
+           pbCarga.setString("Cargando... "+pbCarga.getValue()+"%");//Establece un texto en la barra de progreso
+        });
+        timer.start();//inicia el timer
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,11 +65,12 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlBackground = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        pbCarga = new javax.swing.JProgressBar();
         pnlCerrar = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(350, 350));
         setSize(new java.awt.Dimension(350, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -65,6 +84,13 @@ public class Principal extends javax.swing.JFrame {
                 pnlBackgroundMousePressed(evt);
             }
         });
+
+        jLabel1.setFont(new java.awt.Font("Lucida Handwriting", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Emmanuelito18");
+
+        pbCarga.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         pnlCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -87,17 +113,30 @@ public class Principal extends javax.swing.JFrame {
         pnlBackground.setLayout(pnlBackgroundLayout);
         pnlBackgroundLayout.setHorizontalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
-                .addContainerGap(319, Short.MAX_VALUE)
-                .addComponent(pnlCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addGroup(pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                        .addComponent(pnlCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBackgroundLayout.createSequentialGroup()
+                        .addComponent(pbCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65))))
         );
         pnlBackgroundLayout.setVerticalGroup(
             pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addGap(111, 111, 111)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(pbCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -166,6 +205,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JProgressBar pbCarga;
     private javax.swing.JPanel pnlBackground;
     private javax.swing.JPanel pnlCerrar;
     // End of variables declaration//GEN-END:variables
