@@ -1,4 +1,4 @@
-package pantallaPerzonalizada;
+package pantallaPersonalizada;
 
 import java.awt.Color;
 import java.awt.Point;
